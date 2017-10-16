@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[517]:
+# In[614]:
 
 
 from IPython.display import clear_output
@@ -16,7 +16,7 @@ invalid_input = True
 not_empty_position = True
 
 
-# In[518]:
+# In[615]:
 
 
 def clear_game():
@@ -28,23 +28,22 @@ def clear_game():
     invalid_input = True
 
 
-# In[519]:
+# In[616]:
 
 
 def print_board():
     global board
-    print("x-->")
-    print("y |"+board[0]+"|"+board[1]+"|"+board[2]+"|")
-    print("| |"+board[3]+"|"+board[4]+"|"+board[5]+"|")
-    print("V |"+board[6]+"|"+board[7]+"|"+board[8]+"|")
+    print("|"+board[0]+"|"+board[1]+"|"+board[2]+"|")
+    print("|"+board[3]+"|"+board[4]+"|"+board[5]+"|")
+    print("|"+board[6]+"|"+board[7]+"|"+board[8]+"|")
     
 
 
-# In[520]:
+# In[617]:
 
 
 def take_input():
-    global position, invalid_input, number_of_tries
+    global position, invalid_input, number_of_tries, player
     invalid_input = True
     while(invalid_input):
         position = int(input("Input player position: "))
@@ -52,7 +51,7 @@ def take_input():
     
 
 
-# In[521]:
+# In[618]:
 
 
 def place_player():
@@ -63,7 +62,7 @@ def place_player():
         board[position-1] = player["Player two"][1]
 
 
-# In[522]:
+# In[619]:
 
 
 def switch_player():
@@ -76,7 +75,7 @@ def switch_player():
         player["Player two"][0] = False
 
 
-# In[523]:
+# In[620]:
 
 
 def ask_to_play_again():
@@ -91,7 +90,7 @@ def ask_to_play_again():
     return game_state
 
 
-# In[524]:
+# In[621]:
 
 
 def check_input():
@@ -109,7 +108,7 @@ def check_input():
     return invalid_input
 
 
-# In[525]:
+# In[622]:
 
 
 def check_if_position_is_empty():
@@ -122,26 +121,53 @@ def check_if_position_is_empty():
     return not_empty_position
 
 
-# In[527]:
+# In[623]:
 
 
 def clear_cell():
     clear_output(wait = True)
 
 
-# In[529]:
+# In[624]:
 
 
+def check_if_winner():
+    global board, player
+    for key in player.items():
+        if (board[0]==key[1][1] and board[1]== key[1][1] and board[2] == key[1][1])        or (board[3]==key[1][1] and board[4]== key[1][1] and board[5] == key[1][1])        or (board[6]==key[1][1] and board[7]== key[1][1] and board[8] == key[1][1])        or (board[0]==key[1][1] and board[3]== key[1][1] and board[6] == key[1][1])        or (board[1]==key[1][1] and board[4]== key[1][1] and board[7] == key[1][1])        or (board[2]==key[1][1] and board[5]== key[1][1] and board[8] == key[1][1])        or (board[0]==key[1][1] and board[4]== key[1][1] and board[8] == key[1][1])        or (board[2]==key[1][1] and board[4]== key[1][1] and board[6] == key[1][1]):
+            print(key[0]," is the winner")
+            ask_to_play_again()
+
+
+# In[625]:
+
+
+def print_currently_playing():
+    global player
+    for key in player.items():
+        if key[1][0]:
+            print("Playing right now: ", key[0])
+
+
+# In[ ]:
+
+
+clear_game()
 while (game_state):
-    clear_cell()
+    print_currently_playing()
     take_input()
     place_player()
     print_board()
+    check_if_winner()
     switch_player()
     number_of_tries += 1
     if number_of_tries == 9:
         ask_to_play_again()
-    
 
 
-# ###### 
+# In[ ]:
+
+
+
+            
+
