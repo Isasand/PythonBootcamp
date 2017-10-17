@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[49]:
+# In[70]:
 
 
 import math
@@ -13,16 +13,20 @@ class Line(object):
         self.coor2 = coor2
     
     def distance(self):
-        self.distance = math.sqrt((self.coor1[0] - self.coor2[0]) ** 2 + (self.coor1[1] - self.coor2[1]) ** 2) 
-        return self.distance
+        #self.distance = math.sqrt((self.coor1[0] - self.coor2[0]) ** 2 + (self.coor1[1] - self.coor2[1]) ** 2) 
+        x1, y1 = self.coor1
+        x2, y2 = self.coor2
+        return ( (x2-x1) **2 + (y2 - y1) ** 2) **0.5 #self.distance
     
     def slope(self):
-        self.slope = (self.coor1[1]-self.coor2[1])/(self.coor1[0] - self.coor2[0])
-        return self.slope
+        #self.slope = (self.coor1[1]-self.coor2[1])/(self.coor1[0] - self.coor2[0])
+        x1, y1 = self.coor1
+        x2, y2 = self.coor2
+        return float((y2-y1))/(x2-x1)#self.slope
     
 
 
-# In[50]:
+# In[71]:
 
 
 # EXAMPLE OUTPUT
@@ -33,13 +37,13 @@ coordinate2 = (8,10)
 li = Line(coordinate1,coordinate2)
 
 
-# In[51]:
+# In[72]:
 
 
 li.distance()
 
 
-# In[52]:
+# In[73]:
 
 
 li.slope()
