@@ -56,6 +56,16 @@ class Player(object):
         #print("Printing card(s):")
         for card in self._visualhand:
             print(card)
+    
+    #TODO#sum all values, try for ace and sum both with 1/11, check both for !>21 and return the biggest if both are under
+    '''def get_total_value(self):
+        if not len(self._hand) == 0:
+            for card in hand:
+                if card.get_cardtype() == 'ace':
+                    
+         '''           
+                
+        
         
 class Dealer(Player):
     #def __init__(self, hand=[]):
