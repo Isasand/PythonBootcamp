@@ -6,12 +6,23 @@ Created on Tue Oct 24 13:01:08 2017
 """
 from PlayingCard import PlayingCard
 import random
+import time
+import os
+
+clear = lambda: os.system('cls')
 
 class Player(object):
     
-    def __init__(self, money = 0, hand =[]):
+    def __init__(self, name = " ", money = 0, hand =[]):
+        self._name = name
         self._money = money
         self._hand = hand
+    
+    def set_name(self,name):
+        self._name = name
+        
+    def get_name(self):
+        return self._name
     
     def get_hand(self):
         return self._hand
@@ -19,7 +30,7 @@ class Player(object):
     def add_card_to_hand(self, card):
         self._hand.append(card)
         
-    def showhand(self, cards):
+    def printhand(self, cards):
         lns =[]
         for card in cards:
             lns.append(card.create_visual_card())
@@ -39,7 +50,7 @@ class Player(object):
                 hand[8]+=line[8]
                 count+=1
     
-        print("Printing card(s):")
+        #print("Printing card(s):")
         for card in hand:
             print(card)
         
@@ -86,8 +97,18 @@ class Dealer(Player):
     def randomcard(self,deck):
         return random.choice(deck)    
 
-    def deal_cards(self,players, deck):
-        for player in players:
-            player.add_card_to_hand(randomcard(deck))
+    def deal_card(self,players, deck, table, n):
+        for i in range(0,n):
+            for player in players:
+                card = self.randomcard(deck)
+                if card not in (table.get_cards_on_table()):
+                    player.add_card_to_hand(self.randomcard(deck))
+                    table.add_card_to_table(card)
+                    clear()
+                    print("Dealing card number {}...".format(i+1))
+                    player.printhand(player.get_hand())
+                    time.sleep(1)
+                else: 
+                    i-=1
             
-            
+    

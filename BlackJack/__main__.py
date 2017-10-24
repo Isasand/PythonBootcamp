@@ -7,9 +7,11 @@ Created on Tue Oct 24 09:50:13 2017
 from Table import Table 
 from Player import Player
 from Player import Dealer
-import os
 import time
 
+
+
+import os
 
 clear = lambda: os.system('cls')
 
@@ -25,18 +27,26 @@ def print_rules():
     print(content)
     input("OK<ENTER")
     f.close()
-    
+
+def choose_number_of_players(table):
+    n = int(input("How many players? (1-3):"))
+    for i in range(0,n):
+        table.add_players(Player())
+        name = input("Name of player {}:".format(i+1))
+        table.get_player_nr(i).set_name(name)
+
 def playgame():
     dealer = Dealer()
     table = Table(1,400,dealer)
     deck = (table.get_dealer().loaddeck())
     
-    n = int(input("How many players? (1-3):"))
-    for i in range(0,n):
-        table.add_players(Player())
-        
-    print(table.get_currently_playing())
-    print("Min stake: {}\nMax stake: {}".format(table.get_min_stake(), table.get_max_stake()))
+    choose_number_of_players(table)
+    clear()
+    table.print_properties()
+    input("start dealing (enter)")
+    
+    for player in table.get_currently_playing():
+        dealer.deal_card(table.get_currently_playing(), deck, table, 2)
     
     
 def main(args=None):
