@@ -1,0 +1,42 @@
+RULES:
+
+Each player starts by placing a bet in the boxes in front of them.
+The size of the bet is chosen by selecting a marker of the amount you want to bet.
+The minimum and maximum bet is shown on the table.
+
+Start of round:
+Each player gets two open cards, at the same time the dealer recieves
+an open card(European) or two open cards (Atlantic City).
+
+Each turn: 
+You can ask for a card to increase the value of your hand.
+After you've taken the required number of cards, 
+the dealer will complete his hand.
+The goal is to get a better hand than the dealer,
+it should be higher without the total value exceeding 21.
+You can win if the dealer hand is bigger than 21, 
+you'll be 'bust' if you get over 21.
+(being bust means losing your bet!)
+
+Cards:
+A king, queen or jack is worth 10.
+Ace is either one or eleven.
+When an ace is valued at 11, the higher total is called a 'soft' total. 
+Player with a 'soft' hand can either take a card or double 
+without the risk of being bust.
+
+Black jack:
+Black jack = one ace + one card worth ten (ten, jack, queen, king).
+Black jack must be your first two cards and the hand is unbeatable, 
+however it could end even if the dealer also gets black jack.
+
+Options available after drawn card:
+Split, double, give up or stay.
+
+
+If you try to do any of the following, the program will issue a warning
+and ask you to double check if your action was aware:
+
+	*Take card if total value of hand is 17 or higher
+	*Stay if total value of hand is 11 or below
+	*Double if total value of hand is 12 or higher
