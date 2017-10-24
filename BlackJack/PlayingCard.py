@@ -53,7 +53,9 @@ class PlayingCard(object):
             space = '   '
         else:
             space = '  '
-            
+        
+        lines =[" "]*9
+        lines.clear()
         lines =[" "]*9
         lines[0]=('┌─────────┐')
         lines[1]=('│{}{}     │'.format(cardtype, space)) 

@@ -28,7 +28,7 @@ class Table(object):
         
     def get_currently_playing(self):
         return self._currentlyplaying
-    
+
     def get_player_nr(self, n):
         return self._currentlyplaying[n]
     
@@ -37,6 +37,7 @@ class Table(object):
         print("Players at table:")
         for player in self._currentlyplaying:
             print(player.get_name())
+        print("\n")
             
     def get_cards_on_table(self):
         return self._cardsontable

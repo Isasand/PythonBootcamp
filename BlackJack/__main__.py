@@ -9,8 +9,6 @@ from Player import Player
 from Player import Dealer
 import time
 
-
-
 import os
 
 clear = lambda: os.system('cls')
@@ -41,17 +39,25 @@ def playgame():
     deck = (table.get_dealer().loaddeck())
     
     choose_number_of_players(table)
-    clear()
-    table.print_properties()
-    input("start dealing (enter)")
+    input("START GAME (enter)")
+    count = 0
     
     for player in table.get_currently_playing():
-        dealer.deal_card(table.get_currently_playing(), deck, table, 2)
-    
-    
+        for i in range(0,2):
+            clear()
+            table.print_properties()
+            if count >= 1:
+                print("Player {} cards:".format(count))
+                table.get_player_nr(count-1).printhand()
+            print("Player {} cards:".format(count+1))
+            dealer.deal_card(table.get_player_nr(count), deck, table, i)
+            player.printhand()
+            time.sleep(1)
+        count+=1
+        
 def main(args=None):
-    gameon = True
-    while gameon:
+    programon = True
+    while programon:
         clear()
         welcome()
         while True:
@@ -76,9 +82,10 @@ def main(args=None):
             clear()
             print("Closing program...")
             time.sleep(0.5)
-            gameon = False
+            programon = False
         else:
-            print("input valid command")
+            print("Try a valid choice")
+            time.sleep(0.5)
     
     '''for i in range(0,4):
         input("press enter for random hand:" )
@@ -88,9 +95,6 @@ def main(args=None):
         printhand(l)'''
     #input("press enter to continue")
 
-
-
-    
 if __name__ == "__main__":
     main()
     

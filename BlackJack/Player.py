@@ -13,10 +13,11 @@ clear = lambda: os.system('cls')
 
 class Player(object):
     
-    def __init__(self, name = " ", money = 0, hand =[]):
+    def __init__(self, name = " ", money = 0):
         self._name = name
         self._money = money
-        self._hand = hand
+        self._hand = []
+        self._visualhand = [" "]*9
     
     def set_name(self,name):
         self._name = name
@@ -30,35 +31,36 @@ class Player(object):
     def add_card_to_hand(self, card):
         self._hand.append(card)
         
-    def printhand(self, cards):
+    def printhand(self):
         lns =[]
-        for card in cards:
+        lns.clear()
+        self._visualhand.clear()
+        self._visualhand = [" "]*9
+        for card in self._hand:
             lns.append(card.create_visual_card())
         
-        hand = [" "]*9
         count = 0
         for line in lns:
             if count < 4:  
-                hand[0]+=line[0]
-                hand[1]+=line[1]
-                hand[2]+=line[2]
-                hand[3]+=line[3]
-                hand[4]+=line[4]
-                hand[5]+=line[5]
-                hand[6]+=line[6]
-                hand[7]+=line[7]
-                hand[8]+=line[8]
+                self._visualhand[0]+=line[0]
+                self._visualhand[1]+=line[1]
+                self._visualhand[2]+=line[2]
+                self._visualhand[3]+=line[3]
+                self._visualhand[4]+=line[4]
+                self._visualhand[5]+=line[5]
+                self._visualhand[6]+=line[6]
+                self._visualhand[7]+=line[7]
+                self._visualhand[8]+=line[8]
                 count+=1
     
         #print("Printing card(s):")
-        for card in hand:
+        for card in self._visualhand:
             print(card)
         
 class Dealer(Player):
-    
-    def __init__(self, hand=[]):
-        Player.__init__(self,money=0,hand=[])
-        self._hand = hand
+    #def __init__(self, hand=[]):
+     #   Player.__init__(self,money=0,hand=[])
+        
         
     def loaddeck(self):
         deck = [PlayingCard('ace', 'club', '1/11'), PlayingCard('ace', 'diamond', '1/11'), 
@@ -97,18 +99,13 @@ class Dealer(Player):
     def randomcard(self,deck):
         return random.choice(deck)    
 
-    def deal_card(self,players, deck, table, n):
-        for i in range(0,n):
-            for player in players:
-                card = self.randomcard(deck)
-                if card not in (table.get_cards_on_table()):
-                    player.add_card_to_hand(self.randomcard(deck))
-                    table.add_card_to_table(card)
-                    clear()
-                    print("Dealing card number {}...".format(i+1))
-                    player.printhand(player.get_hand())
-                    time.sleep(1)
-                else: 
-                    i-=1
-            
-    
+    def deal_card(self,player, deck, table, n):
+        while True:
+            card = self.randomcard(deck)
+            if card not in (table.get_cards_on_table()):
+                player.add_card_to_hand(card)
+                table.add_card_to_table(card)
+                print("Dealing card number {}...".format(n+1))
+                break
+            else:
+                continue
